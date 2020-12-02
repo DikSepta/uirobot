@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>ui-robot</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	    <!-- Bootstrap CSS -->
+	    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    </head>
+    <body id="id_body">
+    	<!-- header of your site including navbar -->
+    	<header>
+    		<nav class="navbar navbar-expand-md navbar-light">
+    			<ul class="navbar-nav container-fluid">
+    				<li class=" nav-item active col-lg-1"><a class="nav-link" href="{% url 'home'%}">Home</a></li>
+                {% if request.user.is_authenticated %}  
+    				<li class="nav-item active col-lg-1 ml-auto"><a class="nav-link" href="{% url 'logout'%}">Logout</a></li>
+                {% else %}
+                    <li class="nav-item active col-lg-1 ml-auto"><a class="nav-link" href="{% url 'login'%}">Login</a></li>
+                {% endif %}                
+    			</ul>
+    		</nav>
+    	</header>
+    	<!-- main content of your site -->
+    	<main class="rounded col-lg-8 offset-lg-2 bg-light" style="padding-bottom: 20px">
+    		<section id='id_about' class="mt-lg-2">
+				<h3 class="text-center">UI Robot</h3>
+				<img class="rounded mx-auto d-block" src="{% static 'robot.png'%}" width="256" height="256">
+				<p class="text-center">XXX robot monitoring system. Monitor your robot activity</p>
+    		</section>
+    		<section id='id_activity' class="mt-lg-2">
+				<h3 class='text-center'>Latest Robot's Activity</h3>
+                <canvas id='map_canvas' height="{{map.map_image.height}}" width="{{map.map_image.width}}">               
+                </canvas>
+                {% block map_content %}
+                {% if request.user.is_authenticated %}  
+                <div id="change_map">
+                <a class="btn btn-primary" href="{% url 'upload_map'%}">Change map</a>
+                {% endif %}
+                {% endblock map_content %}
+                </div>
+                <img style="display: none" id="id_map_image" src="{{map.map_image.url}}">
+    		</section>
+    	</main>
+
+    	<!-- footer of your site, usually copyright content -->
+    	<footer>
+    		<p style="padding: 10px 10px 0px 0px; margin: 0px 10px 10px 10px; ">Copyright Diky Septa</p>
+    	</footer>
+	    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="{%static 'app.js'%}"></script>
+    </body>
+</html>

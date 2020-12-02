@@ -1,0 +1,16 @@
+{% extends 'base.html'%}
+
+{% block update_position %}
+<p>height : {{latest_map.map_image.height}}</p>
+<p>width : {{latest_map.map_image.width}}</p>
+<p>url : {{latest_map.map_image.url}}</p>
+<p>converted pos x : {{converted_pos.x}}</p>
+<p>converted pos y : {{converted_pos.y}}</p>
+
+<canvas class="mx-auto d-block" id='map_canvas' height="{{latest_map.map_image.height}}" width="{{latest_map.map_image.width}}">
+	Browser anda tidak support canvas
+</canvas>
+<script type="text/javascript">
+
+</script>
+{% endblock update_position %}

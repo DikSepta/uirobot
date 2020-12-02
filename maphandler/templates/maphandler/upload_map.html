@@ -1,0 +1,10 @@
+{% extends 'base.html'%}
+
+{% block map_content %}
+
+<form method="POST" enctype="multipart/form-data"> {% csrf_token %}
+	{{map_form.as_p}}
+	<button type="submit">Upload</button>
+</form>
+
+{% endblock map_content %}
