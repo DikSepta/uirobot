@@ -1,5 +1,6 @@
 let counter = 0;
 
+//set timer to update robot position every 500 ms
 setInterval(function(){
     let xhr = new XMLHttpRequest();
     

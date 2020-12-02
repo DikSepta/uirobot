@@ -3,6 +3,7 @@ from django.forms import ModelForm
 from django.contrib.auth.models import User 
 from django.contrib.auth import authenticate
 
+#user login form
 class UserLoginForm(ModelForm):
 
 	class Meta:

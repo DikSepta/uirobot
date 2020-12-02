@@ -3,10 +3,13 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 
 # Create your models here.
+
+#location for the stored map image
 def upload_location(instance, filename = None):
 	date = timezone.now()
 	return	'map/{current_date}'.format(current_date=str(date))	
 
+#Map model
 class RobotMap(models.Model):
 	map_image = models.ImageField(upload_to=upload_location,help_text='only accept PNG or PGM image file')
 	date_uploaded = models.DateTimeField(auto_now_add=True)
@@ -18,12 +21,14 @@ class RobotMap(models.Model):
 	scale_x = models.FloatField(default=0, help_text='map horizontal scale in 1 pixel : xx meter')
 	scale_y = models.FloatField(default=0, help_text='map vertical scale in 1 pixel : xx meter')
 
+	#order the model based on date_updated
 	class Meta:
 		ordering = ['date_updated']
 
 	def __str__(self):
 		return self.description
 
+#robot position model
 class RobotCoordinate(models.Model):
 	map_image = models.ForeignKey(RobotMap, on_delete=models.CASCADE)
 	date_uploaded = models.DateTimeField(auto_now_add=True)

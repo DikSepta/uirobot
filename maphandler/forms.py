@@ -8,6 +8,7 @@ class UploadMapForm(ModelForm):
 		model = RobotMap
 		exclude = ['date_uploaded', 'date_updated', 'uploader', 'size_x', 'size_y']
 
+	#validation to only accept PNG or PGM image
 	def clean(self):
 		if self.is_valid():
 			img = self.cleaned_data['map_image']
